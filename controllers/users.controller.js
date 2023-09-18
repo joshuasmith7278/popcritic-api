@@ -1,6 +1,4 @@
 const client = require('../config/db.config').user;
-const dbUsers = require('../models/users.model');
-const Users = dbUsers.Users;
 
 exports.getAllUsers = async (req, res) => {
     

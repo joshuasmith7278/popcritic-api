@@ -6,16 +6,20 @@ exports.getAllUsers = async (req, res) => {
     (error, results) => {
         if(error){
             res.status(500).send(error);
-            console.log("500 SQL Server Error");
         }else{
-            const users = [];
-            for(let i = 0; i < results.rowCount; i++){
-                
-                users.push(results.rows[i].NAME);
-            }
 
-            res.status(201).send(users);
-            console.log("201 All Users Found!");
+            if(results.rowCount === 0){
+                res.status(204).send("No users in DB")
+            }
+            else{
+                const users = [];
+                for(let i = 0; i < results.rowCount; i++){
+                    
+                    users.push(results.rows[i].NAME);
+                }
+
+                res.status(200).send(users);
+            }
 
         }
     });
@@ -28,15 +32,12 @@ exports.findOneUser = async (req, res) => {
     (error, results)=>{
         if(error){
             res.status(500).send(error);
-            console.log("500 SQL Server error");
         }else{
             if(results.rowCount === 0){
-                res.status(209).send("No User Found");
-                console.log("501 No User Found");
+                res.status(204).send("No User Found");
             }
             else{
-                res.status(202).send(results.rows);
-                console.log("202 Found User!");
+                res.status(200).send(results.rows);
 
             }
             
@@ -52,14 +53,14 @@ exports.findUserEmail = async(req, res) =>{
     client.query('SELECT * FROM "USERS" WHERE "EMAIL"=$1', [params.email],
     (error, results)=>{
         if(error){
-            res.status(501).send(error)
+            res.status(500).send(error)
         }
         else{
             if(results.rowCount === 0){
-                res.status(209).send("User not found")
+                res.status(204).send("User not found")
             }
             else{
-                res.status(203).send(results.rows)
+                res.status(200).send(results.rows)
             }
         }
     })
@@ -71,7 +72,6 @@ exports.createUser = async (req, res) => {
     if(!req.body){
         
         res.status(400).send({message:"Content cant be empty"});
-        console.log("400 Request Body Empty");
     
     }
     else{
@@ -83,17 +83,14 @@ exports.createUser = async (req, res) => {
         (error, results)=>{
             if(error){
                 res.status(500).send(error);
-                console.log(error);
             }else{
                 client.query('SELECT * FROM "USERS"', [], 
                 (error, results)=>{
                     if(error){
-                        res.status(501).send(error);
-                        console.log("501 Create User");
+                        res.status(500).send(error);
                     }else{
                         const newUserList = results.rows;
                         res.status(200).send(newUserList);
-                        console.log("200 User Created!");
                     }
                 })
             }
@@ -110,17 +107,14 @@ exports.updateUser = (req, res) => {
     (error, results)=>{
         if(error){
             res.status(500).send(error);
-            console.log(error);
         }else{
             client.query('SELECT * FROM "USERS" WHERE "USER_ID"=$1', [params],
             (error, results)=>{
                 if(error){
-                    res.status(501).send(error);
-                    console.log("501 Update User")
+                    res.status(500).send(error);
                 }else{
                     const updatedUserList = results;
                     res.status(200).send(updatedUserList.rows);
-                    console.log("200 Updated User Successfully!");
                 }
             })
         }
@@ -137,7 +131,6 @@ exports.deleteUser = (req, res) => {
     (error, results)=>{
         if(error){
             res.status(500).send(error);
-            console.log("500 SQL Server Error");
         }else{
             client.query('SELECT * FROM "USERS"', [params.id], 
             (error, results)=>{

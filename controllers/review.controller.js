@@ -6,9 +6,9 @@ exports.getAllReviews = async (req, res) =>{
             res.status(500).send(error);
         }else{
             if(results.rowCount === 0){
-                res.status(212).send("No reviews in DB")
+                res.status(204).send("No reviews in DB")
             }else{
-                res.status(206).send(results.rows)
+                res.status(200).send(results.rows)
             }
         }
     })

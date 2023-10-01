@@ -7,7 +7,12 @@ exports.getAllMovies = async (req, res) => {
             res.status(500).send(error);
             console.log(error);
         }else{
-            res.status(200).send(results.rows);
+            if(results.rowCount === 0){
+                res.status(204).send("No movies found in DB")
+            }
+            else{
+                res.status(200).send(results.rows);
+            }
             
         }
     })
@@ -15,21 +20,17 @@ exports.getAllMovies = async (req, res) => {
 
 exports.getMovieName = async (req, res) =>{
     const name = req.params.name;
-    console.log("%" + name + "%")
     const searchName = "%" + name + "%"
 
     client.query('SELECT * FROM "MOVIE" WHERE "TITLE" LIKE $1', [searchName], 
     (error, results)=>{
         if(error){
             res.status(500).send(error);
-            console.log("500 GET movie by name SQL error")
         }else{
             if(results.rowCount === 0){
-                res.status(400).send("No movie found")
-                console.log("400 GET movie by name unsuccessful")
+                res.status(204).send("No movie found")
             }else{
                 res.status(200).send(results.rows);
-                console.log("200 GET movie by name successful")
 
             }
     

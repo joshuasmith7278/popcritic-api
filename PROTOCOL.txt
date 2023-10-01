@@ -1,0 +1,18 @@
+Popcritic Backend Express API
+
+HTTP Status Codes our API represents
+
+200 = Successful HTTP request
+204 = No result for HTTP request (results.rowCount === 0)
+400 = Bad HTTP request (incorrent HTTP parameter)
+404 = No Endpoint for HTTP request (GET /directors (no directors endpoint))
+500 = Internal Server Error (accepted request but error in server)
+
+We create endpoints in Routes, which are tied to Controllers, which are tied to
+HTTP methods querying our PostgreSQL Database.
+
+These endpoints are queryed by out Front end application when the user actions a 
+request.
+
+
+React (FE) 8000 <--------> Express (BE) 9000 <----------> PostgreSQL (DB) 5432

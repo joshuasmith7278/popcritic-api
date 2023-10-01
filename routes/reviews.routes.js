@@ -5,6 +5,8 @@ module.exports = (app) => {
 
     const revCntr = require('../controllers/review.controller')
 
-    app.get('/reviews', revCntr.get)
+    app.get('/reviews', revCntr.getAllReviews)
+
+    app.use('/', router)
 
 }

@@ -27,6 +27,7 @@ app.use(bodyParser.json());
 //Import Routes to listen for
 require('./routes/users.routes')(app);
 require('./routes/movies.routes')(app);
+require('./routes/reviews.routes')(app);
 
 dbConn();
 

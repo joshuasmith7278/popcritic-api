@@ -31,7 +31,7 @@ exports.findOneUser = async (req, res) => {
             console.log("500 SQL Server error");
         }else{
             if(results.rowCount === 0){
-                res.status(501).send("No User Found");
+                res.status(209).send("No User Found");
                 console.log("501 No User Found");
             }
             else{
@@ -56,7 +56,7 @@ exports.findUserEmail = async(req, res) =>{
         }
         else{
             if(results.rowCount === 0){
-                res.status(501).send("User not found")
+                res.status(209).send("User not found")
             }
             else{
                 res.status(203).send(results.rows)

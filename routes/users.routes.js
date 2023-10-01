@@ -13,7 +13,10 @@ module.exports = app => {
   router.get('/users', userContr.getAllUsers);
 
   //Find one user
-  router.get('/users/:id', userContr.findOneUser);
+  //router.get('/users/:id', userContr.findOneUser);
+
+
+  router.get('/users/:email', userContr.findUserEmail);
 
   //Update one User
   router.put('/users/:id', userContr.updateUser);

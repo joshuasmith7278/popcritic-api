@@ -46,6 +46,26 @@ exports.findOneUser = async (req, res) => {
 }
 
 
+exports.findUserEmail = async(req, res) =>{
+    const params = req.params;
+
+    client.query('SELECT * FROM "USERS" WHERE "EMAIL"=$1', [params.email],
+    (error, results)=>{
+        if(error){
+            res.status(501).send(error)
+        }
+        else{
+            if(results.rowCount === 0){
+                res.status(501).send("User not found")
+            }
+            else{
+                res.status(203).send(results.rows)
+            }
+        }
+    })
+}
+
+
 //Call this function to create USER entry in DB
 exports.createUser = async (req, res) => {
     if(!req.body){

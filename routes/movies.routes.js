@@ -8,6 +8,8 @@ module.exports = (app) =>{
 
     router.get('/movies/:name', movieContlr.getMovieName)
 
+    router.get('/getMovie/:id', movieContlr.getMovieID)
+
     //router.post('/movies', movieContlr.insertMovie);
     //router.delete('/movies/:id', movieContlr.deleteMovie);
 

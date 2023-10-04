@@ -39,6 +39,25 @@ exports.getMovieName = async (req, res) =>{
 
 }
 
+
+exports.getMovieID = async (req, res) => {
+    const id = req.params.id;
+
+    client.query('SELECT * FROM "MOVIE" WHERE "MOVIE_ID"=$1', [id], 
+    (error, results)=> {
+        if(error){
+            res.status(500).send(error)
+        }else{
+            if(results.rowCount === 0){
+                res.status(204).send("No Movie found")
+
+            }else{
+                res.status(200).send(results.rows);
+            }
+        }
+    })
+}
+
 /*
 exports.insertMovie = async (req, res) =>{
     if(!req.body){

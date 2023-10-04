@@ -7,6 +7,10 @@ module.exports = (app) => {
 
     app.get('/reviews', revCntr.getAllReviews)
 
+    app.post('/reviews', revCntr.createReview)
+
+    app.get('/homeRev', revCntr.getHomeReviews)
+
     app.use('/', router)
 
 }

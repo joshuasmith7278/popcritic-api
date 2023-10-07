@@ -17,7 +17,7 @@ exports.getAllReviews = async (req, res) =>{
 
 
 exports.getHomeReviews = async (req, res)=>{
-    client.query( 'SELECT "TITLE","POSTER","REVIEW_TEXT", "RATING" FROM "MOVIE" INNER JOIN "MOVIE_USERS" ON "MOVIE_ID"="MOVIE_MOVIE_ID" ORDER BY "REVIEW_ID"  DESC LIMIT 3', (error, results)=>{
+    client.query( 'SELECT "TITLE","POSTER","REVIEW_TEXT", "RATING", "MOVIE_MOVIE_ID" FROM "MOVIE" INNER JOIN "MOVIE_USERS" ON "MOVIE_ID"="MOVIE_MOVIE_ID" ORDER BY "REVIEW_ID"  DESC LIMIT 3', (error, results)=>{
         if(error){
             res.status(500).send(error)
             
@@ -30,6 +30,26 @@ exports.getHomeReviews = async (req, res)=>{
         }
     }
     )
+}
+
+
+exports.getRevByMovieID = async(req, res)=>{
+    if(!req.params){
+        res.status(400).send("Request cant be empty!")
+    }else{
+        const movieID = req.params.mid;
+        console.log(movieID)
+        client.query('SELECT * FROM "MOVIE_USERS" WHERE "MOVIE_MOVIE_ID"=$1', [movieID], (error, results)=>{
+            if(error){
+                res.status(501).send(error)
+            }else{
+                res.status(200).send(results.rows)
+            }
+        })
+
+
+    }
+    
 }
 
 

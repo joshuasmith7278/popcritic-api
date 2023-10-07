@@ -43,7 +43,11 @@ exports.getRevByMovieID = async(req, res)=>{
             if(error){
                 res.status(501).send(error)
             }else{
-                res.status(200).send(results.rows)
+                if(results.rowCount === 0){
+                    res.status(204).send("No reviews in DB")
+                }else{
+                    res.status(200).send(results.rows)
+                }
             }
         })
 

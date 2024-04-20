@@ -58,10 +58,10 @@ exports.getMovieID = async (req, res) => {
     })
 }
 
-/*
+
 exports.insertMovie = async (req, res) =>{
     if(!req.body){
-        res.status(400).send("400 Request Body Empty!");
+        res.status(400).send({message:"Content cant be empty"});
         console.log("GET 400 insertMovie Request Body Empty")
     }else{
 
@@ -86,11 +86,11 @@ exports.insertMovie = async (req, res) =>{
                         (error, results)=>{
                             if(error){
                                 res.status(501).send(error);
-                                console.log("501 Create User");
+                                console.log("501 Add Movie");
                             }else{
                                 const newUserList = results.rows;
                                 res.status(200).send(newUserList);
-                                console.log("200 User Created!");
+                                console.log("200 Movie Added");
                             }
                         })
                     }
@@ -129,4 +129,3 @@ exports.deleteMovie = async (req, res) =>{
     })
     
 }
-*/

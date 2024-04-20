@@ -10,8 +10,8 @@ module.exports = (app) =>{
 
     router.get('/getMovie/:id', movieContlr.getMovieID)
 
-    //router.post('/movies', movieContlr.insertMovie);
-    //router.delete('/movies/:id', movieContlr.deleteMovie);
+    router.post('/movies', movieContlr.insertMovie);
+    router.delete('/movies/:id', movieContlr.deleteMovie);
 
     app.use('/', router);
 }

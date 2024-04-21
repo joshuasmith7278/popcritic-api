@@ -18,7 +18,7 @@ exports.getAllUsers = async (req, res) => {
                     users.push(results.rows[i].NAME);
                 }
 
-                res.status(200).send(users);
+                res.status(200).send(results.rows);
             }
 
         }

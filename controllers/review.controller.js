@@ -1,7 +1,7 @@
 const client = require('../config/db.config').user;
 
 exports.getAllReviews = async (req, res) =>{
-    client.query('SELECT * FROM "MOVIE_USERS" ORDER BY "REVIEW_ID" DESC LIMIT 3', (error, results)=>{
+    client.query('SELECT * FROM "MOVIE_USERS" ORDER BY "REVIEW_ID"', (error, results)=>{
         if(error){
             res.status(500).send(error);
         }else{
@@ -62,12 +62,9 @@ exports.createReview = async(req, res) => {
     if(!req.body){
         res.status(400).send("HTTP Request cannot be empty")
     }else{
-        const movieID = req.body.mid;
-        const userID = req.body.uid;
-        const review = req.body.rev;
-        const rating = req.body.rat;
+        const formData = req.body
         client.query('INSERT INTO "MOVIE_USERS"("MOVIE_MOVIE_ID", "USERS_USER_ID", "REVIEW_ID", "REVIEW_TEXT", "RATING") VALUES($1, $2, nextval($3), $4, $5)', 
-        [movieID, userID, 'review_id', review, rating], 
+        [formData.movieID, formData.userID, 'review_id', formData.review, formData.rating], 
         (error, results)=>{
             if(error){
                 res.status(500).send(error);

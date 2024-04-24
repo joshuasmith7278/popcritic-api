@@ -28,6 +28,8 @@ app.use(bodyParser.json());
 require('./routes/users.routes')(app);
 require('./routes/movies.routes')(app);
 require('./routes/reviews.routes')(app);
+require('./routes/TMDB.routes')(app);
+
 
 dbConn();
 

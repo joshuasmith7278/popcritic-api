@@ -15,7 +15,7 @@ const testDBConn = async () => {
             }
         )
         await client.connect();
-        console.log("Postgres DB conn successful");
+        console.log("PostgreSQL Database Connection Successful!");
         await client.end();
         
     }

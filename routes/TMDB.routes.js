@@ -9,6 +9,9 @@ module.exports = (app) => {
 
     app.get('/images/:mid', TMDBcontroller.getImages)
 
+    app.get('/search/:search', TMDBcontroller.searchMovie)
+
+
     app.use('/', router)
 
 }

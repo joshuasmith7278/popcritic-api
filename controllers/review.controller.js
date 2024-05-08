@@ -17,7 +17,7 @@ exports.getAllReviews = async (req, res) =>{
 
 
 exports.getHomeReviews = async (req, res)=>{
-    client.query( 'SELECT "TITLE","POSTER","REVIEW_TEXT", "RATING", "MOVIE_MOVIE_ID" FROM "MOVIE" INNER JOIN "MOVIE_USERS" ON "MOVIE_ID"="MOVIE_MOVIE_ID" ORDER BY "REVIEW_ID"  DESC LIMIT 3', (error, results)=>{
+    client.query( 'SELECT "TITLE","POSTER","REVIEW_TEXT", "RATING", "MOVIE_MOVIE_ID" FROM "MOVIE" INNER JOIN "MOVIE_USERS" ON "MOVIE_ID"="MOVIE_MOVIE_ID" ORDER BY "REVIEW_ID"  DESC LIMIT 9', (error, results)=>{
         if(error){
             res.status(500).send(error)
             

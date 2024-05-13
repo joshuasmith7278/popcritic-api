@@ -7,7 +7,7 @@ module.exports = (app) => {
 
     app.get('/recents', TMDBcontroller.getAllReviews)
 
-    app.get('/images/:mid', TMDBcontroller.getImages)
+    app.get('/movie/:mid', TMDBcontroller.getMovie)
 
     app.get('/search/:search', TMDBcontroller.searchMovie)
 

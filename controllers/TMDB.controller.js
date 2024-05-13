@@ -61,14 +61,14 @@ exports.searchMovie = async(req, res) =>{
 
 }
 
-exports.getImages = async (req, res) =>{
+exports.getMovie = async (req, res) =>{
 
     if(!req.params){
         res.status(400).send("Request cant be empty!")
     }else{
         const movieID = req.params.mid;
         try{
-            const url = 'https://api.themoviedb.org/3/movie/' + movieID + '/images';
+            const url = 'https://api.themoviedb.org/3/movie/' + movieID;
             const options = {
             method: 'GET',
             headers: {
@@ -77,7 +77,7 @@ exports.getImages = async (req, res) =>{
             }
             };
         
-            console.log("Get Images TMBD Controller")
+            console.log("Get Movie by ID TMBD Controller")
         
     
             await fetch(url, options)

@@ -11,7 +11,11 @@ module.exports = (app) => {
 
     app.get('/homeRev', revCntr.getHomeReviews)
 
+    app.get('/reviews/:rid', revCntr.getReviewByRID)
+
     app.get('/getRevFromMID/:mid', revCntr.getRevByMovieID)
+
+    app.get('/getReviewsFromUID/:uid', revCntr.getReviewsByUID)
 
     app.use('/', router)
 
